@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.TextFlow?>
+
+<BorderPane prefHeight="720.0" prefWidth="1120.0"
+            stylesheets="@text-finder.css"
+            xmlns="http://javafx.com/javafx/21"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.example.textfinder.Interface_Controller">
+    <top>
+        <HBox alignment="CENTER_LEFT" spacing="18.0" styleClass="app-header">
+            <children>
+                <VBox spacing="3.0" HBox.hgrow="ALWAYS">
+                    <Label styleClass="eyebrow" text="DOCUMENT SEARCH DESKTOP APP" />
+                    <Label styleClass="app-title" text="Text Finder" />
+                </VBox>
+                <Label fx:id="indexStatus" styleClass="status-pill" text="Index ready when you are" />
+            </children>
+        </HBox>
+    </top>
+    <center>
+        <HBox spacing="18.0" styleClass="workspace">
+            <children>
+                <VBox prefWidth="350.0" spacing="14.0" styleClass="panel">
+                    <children>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label styleClass="section-title" text="Document library" HBox.hgrow="ALWAYS" />
+                            <Label fx:id="libraryStatus" styleClass="muted-label" text="0 documents" />
+                        </HBox>
+                        <Label styleClass="section-description"
+                               text="Build a searchable collection from TXT, PDF, and DOCX files."
+                               wrapText="true" />
+                        <FlowPane hgap="8.0" vgap="8.0">
+                            <Button onAction="#btn_anadir_doc" styleClass="primary-button" text="Add document" />
+                            <Button onAction="#btn_anadir_carpeta" styleClass="secondary-button" text="Add folder" />
+                        </FlowPane>
+                        <ListView fx:id="listview_biblioteca" VBox.vgrow="ALWAYS" />
+                        <FlowPane hgap="8.0" vgap="8.0">
+                            <Button onAction="#btn_actualizar_doc" styleClass="ghost-button" text="Refresh" />
+                            <Button onAction="#btn_eliminar_doc" styleClass="ghost-button" text="Remove" />
+                            <Button onAction="#btn_IndizarArchivos" styleClass="primary-button" text="Build index" />
+                        </FlowPane>
+                    </children>
+                </VBox>
+
+                <VBox spacing="14.0" styleClass="panel" HBox.hgrow="ALWAYS">
+                    <children>
+                        <VBox spacing="5.0">
+                            <Label styleClass="section-title" text="Search the collection" />
+                            <Label styleClass="section-description"
+                                   text="Find a word through the AVL index or search an exact phrase across document text."
+                                   wrapText="true" />
+                        </VBox>
+                        <HBox spacing="9.0">
+                            <TextField fx:id="TextFieldBuscar"
+                                       onAction="#btn_Buscar_Archivos"
+                                       promptText="Enter a word or phrase"
+                                       HBox.hgrow="ALWAYS" />
+                            <Button onAction="#btn_Buscar_Archivos" styleClass="primary-button" text="Search" />
+                            <MenuButton fx:id="btn_Sort" styleClass="secondary-button" text="Sort">
+                                <items>
+                                    <MenuItem onAction="#Sort_by_Name" text="Name" />
+                                    <MenuItem onAction="#Sort_by_Date" text="Modified date" />
+                                    <MenuItem onAction="#Sort_by_size" text="File size" />
+                                </items>
+                            </MenuButton>
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT">
+                            <Label fx:id="resultStatus" styleClass="muted-label" text="0 results" HBox.hgrow="ALWAYS" />
+                            <Button fx:id="openDocumentButton"
+                                    onAction="#btn_Abrir_Doc1"
+                                    styleClass="link-button"
+                                    text="Open selected document" />
+                        </HBox>
+                        <ListView fx:id="listview_results" prefHeight="210.0" />
+                        <Label styleClass="preview-label" text="DOCUMENT PREVIEW" />
+                        <ScrollPane fitToWidth="true" pannable="true" VBox.vgrow="ALWAYS">
+                            <content>
+                                <StackPane alignment="TOP_LEFT" styleClass="preview-surface">
+                                    <padding>
+                                        <Insets bottom="18.0" left="20.0" right="20.0" top="18.0" />
+                                    </padding>
+                                    <TextFlow fx:id="textFlow" lineSpacing="4.0" />
+                                </StackPane>
+                            </content>
+                        </ScrollPane>
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+    </center>
+</BorderPane>
